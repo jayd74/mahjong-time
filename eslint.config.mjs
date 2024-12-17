@@ -1,7 +1,7 @@
-import { FlatCompat } from "@eslint/eslintrc";
+import { FlatCompat } from '@eslint/eslintrc';
 import eslint from '@eslint/js';
-import { fileURLToPath } from "url";
-import path from "path";
+import { fileURLToPath } from 'url';
+import path from 'path';
 import tseslint from 'typescript-eslint';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -12,23 +12,25 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends('next/core-web-vitals', 'next/typescript'),
 ];
 
-export default  tseslint.config({
+export default tseslint.config({
   extends: [
     eslint.configs.recommended,
     tseslint.configs.recommended,
     eslintConfig,
   ],
   rules: {
-    "sort-imports": ["warn", {
-        "allowSeparatedGroups": true
-    }],
+    'sort-imports': [
+      'warn',
+      {
+        allowSeparatedGroups: true,
+      },
+    ],
     'no-trailing-spaces': ['warn'],
     'no-multiple-empty-lines': ['error', { max: 1 }],
     'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
     '@typescript-eslint/consistent-type-imports': 'error',
   },
-}
-);
+});
