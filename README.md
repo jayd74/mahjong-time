@@ -1,4 +1,4 @@
-# Mahjong Time
+# 🀄️ Mahjong Time
 
 To keep track of your Mahjong Scores
 
