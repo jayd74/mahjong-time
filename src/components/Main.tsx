@@ -14,7 +14,7 @@ const Main = () => {
         variant="h3"
         sx={(theme) => ({ color: theme.palette.primary.main })}
       >
-        Mahjong Time
+        🀄️ Mahjong Time 🀄️
       </Typography>
     </Box>
   );
