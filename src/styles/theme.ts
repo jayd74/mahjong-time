@@ -40,7 +40,7 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: `'Helvetica Neue', Arial, sans-serif`,
+    fontFamily: `'Roboto', Arial, sans-serif`,
     h3: {
       fontSize: '48px',
       fontWeight: 700,
