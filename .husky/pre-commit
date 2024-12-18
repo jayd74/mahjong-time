@@ -20,7 +20,7 @@ CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 FILE_COUNT=0
 ERROR_COUNT=0
 
-output "Unbe cleaning your code..."
+output "Shuffling your tiles..."
 
 for file in $(git diff-index --diff-filter=d --cached --name-only HEAD)
 do
