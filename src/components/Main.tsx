@@ -12,7 +12,7 @@ const Main = () => {
     >
       <Typography
         variant="h3"
-        sx={(theme) => ({ color: theme.palette.primary.main })}
+        sx={(theme) => ({ color: theme.palette.primary.light })}
       >
         🀄️ Mahjong Time! 🀄️
       </Typography>

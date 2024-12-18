@@ -1,15 +1,15 @@
 import { createTheme } from '@mui/material';
 
 export const colors = {
-  purple: 'rgba(115, 107, 206, 0.4)',
-  darkPurple: 'rgba(8, 9, 29, 0.2)',
-  backgroundPurple: 'rgba(8, 9, 30, 1)',
-  lightPurple: 'rgba(146, 149, 201, 1)',
-  lightRed: 'rgba(255, 156, 128, 1)',
-  red: 'rgba(254, 116, 77, 1)',
-  darkRed: 'rgba(254, 116, 77, 0.4)',
-  grey: 'rgba(95, 95, 95, 0.4)',
-  lightGreen: 'rgba(73, 255, 222, 1)',
+  purple: '#262957',
+  darkPurple: '#1D1E3F',
+  backgroundPurple: '#08091E',
+  lightPurple: '#9295C9',
+  lightRed: '#FFC4B4',
+  red: '#FE744D',
+  darkRed: '#912E14',
+  grey: '#36374D',
+  lightGreen: '#5AFFFB',
 };
 
 export const theme = createTheme({
