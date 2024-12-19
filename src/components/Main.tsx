@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 const Main = () => {
   return (
@@ -16,6 +16,20 @@ const Main = () => {
       >
         🀄️ Mahjong Time! 🀄️
       </Typography>
+      <Box sx={{ display: 'flex', gap: 1 }}>
+        <Button variant="contained" color="primary" disableRipple>
+          Contained Primary
+        </Button>
+        <Button variant="contained" disabled disableRipple>
+          Disabled
+        </Button>
+        <Button variant="outlined" color="primary" disableRipple>
+          Contained Secondary
+        </Button>
+        <Button variant="contained" color="warning" disableRipple>
+          Outlined Info
+        </Button>
+      </Box>
     </Box>
   );
 };
