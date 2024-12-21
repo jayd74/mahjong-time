@@ -21,6 +21,7 @@ export default tseslint.config({
     tseslint.configs.recommended,
     eslintConfig,
   ],
+  files: ['**/*.ts', '**/*.tsx'],
   rules: {
     'sort-imports': [
       'warn',
