@@ -1,7 +1,15 @@
+import { useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import PlayerTile from '@components/PlayerTile';
+import ScoreModal from '@components/ScoreModal';
 
 const Main = () => {
+  const [showScoreModal, setShowScoreModal] = useState(true);
+
+  const handleOpenScoreModal = () => {
+    setShowScoreModal(true);
+  };
+
   return (
     <Box
       sx={{
@@ -32,6 +40,10 @@ const Main = () => {
         </Button>
       </Box>
       <PlayerTile />
+      <Button variant="contained" onClick={handleOpenScoreModal}>
+        Temp Button - Score Modal
+      </Button>
+      <ScoreModal open={showScoreModal} setShowScoreModal={setShowScoreModal} />
     </Box>
   );
 };
