@@ -4,7 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 const PlayerTile = () => {
   return (
     <Box>
-      <Button variant="containedPlayerTile" disableRipple>
+      <Button variant="contained" color="primary">
         <Box
           sx={{
             position: 'absolute',

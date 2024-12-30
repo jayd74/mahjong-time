@@ -66,6 +66,9 @@ export const theme = createTheme({
   },
   components: {
     MuiButton: {
+      defaultProps: {
+        disableRipple: true,
+      },
       styleOverrides: {
         root: {
           borderRadius: '6px',
@@ -126,13 +129,11 @@ export const theme = createTheme({
           width: '20%',
           '&:active': {
             background: '#08091D4D',
-            textShadow: 'none',
           },
           '&.Mui-disabled': {
             background: `linear-gradient(${colors.disablePurple}, ${colors.disablePurple}) padding-box,
                 linear-gradient(to bottom, #4D4D81, #22243A) border-box`,
             colors: colors.purple,
-            textShadow: 'none',
           },
         },
       },

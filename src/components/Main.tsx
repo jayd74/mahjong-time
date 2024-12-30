@@ -18,16 +18,16 @@ const Main = () => {
         🀄️ Mahjong Time! 🀄️
       </Typography>
       <Box sx={{ display: 'flex', gap: 1 }}>
-        <Button variant="contained" color="primary" disableRipple>
+        <Button variant="contained" color="primary">
           Contained Primary
         </Button>
-        <Button variant="contained" disabled disableRipple>
+        <Button variant="contained" disabled>
           Disabled
         </Button>
-        <Button variant="outlined" color="primary" disableRipple>
+        <Button variant="outlined" color="primary">
           Contained Secondary
         </Button>
-        <Button variant="contained" color="warning" disableRipple>
+        <Button variant="contained" color="warning">
           Outlined Info
         </Button>
       </Box>
