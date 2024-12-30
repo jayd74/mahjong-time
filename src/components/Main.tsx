@@ -1,4 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
+import PlayerTile from '@components/PlayerTile';
 
 const Main = () => {
   return (
@@ -30,6 +31,7 @@ const Main = () => {
           Outlined Info
         </Button>
       </Box>
+      <PlayerTile />
     </Box>
   );
 };
