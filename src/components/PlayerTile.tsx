@@ -4,7 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 const PlayerTile = () => {
   return (
     <Box>
-      <Button variant="contained" color="primary">
+      <Button variant="contained" color="secondary">
         <Box
           sx={{
             position: 'absolute',
@@ -30,7 +30,6 @@ const PlayerTile = () => {
             variant="h5"
             sx={(theme) => ({
               color: theme.palette.primary.light,
-              width: '100%',
             })}
           >
             Victoria

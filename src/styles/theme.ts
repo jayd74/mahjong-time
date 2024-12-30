@@ -12,6 +12,8 @@ export const colors = {
   disablePurple: '#36374D',
   lightGreen: '#5AFFFB',
   black50: 'rgba(0, 0, 0, 0.5)',
+  playerTileBackground: '#736BCE1A',
+  playerTileBackgroundActive: '#08091D4D',
 };
 
 export const theme = createTheme({
@@ -22,9 +24,9 @@ export const theme = createTheme({
       dark: colors.darkPurple,
     },
     secondary: {
-      main: colors.red,
+      main: colors.playerTileBackground,
       light: colors.lightRed,
-      dark: colors.darkRed,
+      dark: colors.playerTileBackgroundActive,
     },
     background: {
       default: colors.backgroundPurple,
@@ -101,6 +103,25 @@ export const theme = createTheme({
             background: colors.black50,
           },
         },
+        containedSecondary: {
+          background: '#736BCE1A',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          border: '10px solid',
+          borderImageSlice: '1',
+          borderWidth: '1px',
+          borderRadius: '6px',
+          borderImageSource: 'linear-gradient(to bottom, #434486, #191C40)',
+          color: colors.lightPurple,
+          height: '140px',
+          textShadow: 'none',
+          width: '20%',
+          '&:active': {
+            background: colors.playerTileBackgroundActive,
+          },
+        },
         containedWarning: {
           background: `linear-gradient(${colors.red}, ${colors.red}) padding-box,
           linear-gradient(to bottom, #CB5434, #BC4227) border-box`,
@@ -110,30 +131,6 @@ export const theme = createTheme({
             background: `linear-gradient(${colors.darkRed}, ${colors.darkRed}) padding-box,
             linear-gradient(to bottom, #AF5035, #A23E22) border-box`,
             textShadow: 'none',
-          },
-        },
-        containedPlayerTile: {
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: '#736BCE1A',
-          border: '10px solid',
-          borderImageSlice: '1',
-          borderWidth: '1px',
-          borderRadius: '6px',
-          borderImageSource: 'linear-gradient(to bottom, #434486, #191C40)',
-          color: colors.lightPurple,
-          height: '140px',
-          padding: '15px',
-          width: '20%',
-          '&:active': {
-            background: '#08091D4D',
-          },
-          '&.Mui-disabled': {
-            background: `linear-gradient(${colors.disablePurple}, ${colors.disablePurple}) padding-box,
-                linear-gradient(to bottom, #4D4D81, #22243A) border-box`,
-            colors: colors.purple,
           },
         },
       },
