@@ -36,7 +36,9 @@ export const theme = createTheme({
       secondary: colors.lightRed,
     },
     success: {
-      main: colors.lightGreen,
+      main: colors.borderPurple,
+      light: colors.lightPurple,
+      dark: colors.darkPurple,
     },
     error: {
       main: colors.red,
