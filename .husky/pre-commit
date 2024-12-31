@@ -27,6 +27,7 @@ do
     # we only want to lint the staged changes, not any un-staged changes
 	npx prettier $file --write --ignore-unknown
 	npx eslint --fix-dry-run --no-warn-ignored "$file"
+	npx tsc --noEmit
     if [ $? -ne 0 ]; then
         ERROR_COUNT=$(($ERROR_COUNT+1))
     fi
