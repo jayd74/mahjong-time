@@ -4,7 +4,7 @@ export const colors = {
   purple: '#262957',
   darkPurple: '#1D1E3F',
   backgroundPurple: '#08091E',
-  lightPurple: '#9295c9',
+  lightPurple: '#9295C9',
   borderPurple: '#323161',
   lightRed: '#FFC4B4',
   red: '#FE744D',
@@ -12,6 +12,8 @@ export const colors = {
   disablePurple: '#36374D',
   lightGreen: '#5AFFFB',
   black50: 'rgba(0, 0, 0, 0.5)',
+  playerTileBackground: '#736BCE1A',
+  playerTileBackgroundActive: '#08091D4D',
 };
 
 export const theme = createTheme({
@@ -22,9 +24,9 @@ export const theme = createTheme({
       dark: colors.darkPurple,
     },
     secondary: {
-      main: colors.red,
+      main: colors.playerTileBackground,
       light: colors.lightRed,
-      dark: colors.darkRed,
+      dark: colors.playerTileBackgroundActive,
     },
     background: {
       default: colors.backgroundPurple,
@@ -48,6 +50,11 @@ export const theme = createTheme({
       fontWeight: 700,
       lineHeight: '56.02px',
     },
+    h5: {
+      fontSize: '24px',
+      fontWeight: 400,
+      lineHeight: '32.02px',
+    },
     body1: {
       fontSize: '30px',
       fontWeight: 500,
@@ -61,12 +68,16 @@ export const theme = createTheme({
   },
   components: {
     MuiButton: {
+      defaultProps: {
+        disableRipple: true,
+      },
       styleOverrides: {
         root: {
           borderRadius: '6px',
           padding: '8px 22px',
           border: `1px solid transparent`,
           textShadow: `1px 1px 1px ${colors.black50}`,
+          textTransform: 'capitalize',
         },
         containedPrimary: {
           background: `linear-gradient(${colors.purple}, ${colors.purple}) padding-box,
@@ -90,6 +101,24 @@ export const theme = createTheme({
           color: colors.lightPurple,
           '&:active': {
             background: colors.black50,
+          },
+        },
+        containedSecondary: {
+          background: '#736BCE1A',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          border: '1px solid',
+          borderImageSlice: '1',
+          borderRadius: '6px',
+          borderImageSource: 'linear-gradient(to bottom, #434486, #191C40)',
+          color: colors.lightPurple,
+          height: '140px',
+          textShadow: 'none',
+          width: '20%',
+          '&:active': {
+            background: colors.playerTileBackgroundActive,
           },
         },
         containedWarning: {
