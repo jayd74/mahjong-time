@@ -1,7 +1,7 @@
 import { Button, Typography } from '@mui/material';
 
 const ScoreModalButton = ({ text, isSelected, onClick, variant }) => {
-  const CircleStyle = (theme) => ({
+  const PointsStyle = (theme) => ({
     background: isSelected ? theme.palette.primary.dark : 'transparent',
     borderRadius: '50%',
     border: '1px solid #323161',
@@ -10,14 +10,36 @@ const ScoreModalButton = ({ text, isSelected, onClick, variant }) => {
     padding: '0',
   });
 
+  const WinTypeStyle = (theme) => ({
+    background: isSelected ? theme.palette.primary.dark : 'transparent',
+    borderRadius: '6px',
+    border: '1px solid #323161',
+    margin: '20px 0',
+    width: '100%',
+    padding: '20px 0',
+  });
+
+  const NamesStyle = (theme) => ({
+    background: isSelected ? theme.palette.primary.dark : 'transparent',
+    borderRadius: '6px',
+    border: '1px solid #323161',
+    margin: '20px 0',
+    width: '30%',
+    padding: '20px 0',
+  });
+
   const DefaultButtonStyle = (theme) => ({
     background: theme.palette.primary.light,
   });
 
   const getButtonStyle = (theme) => {
     switch (variant) {
-      case 'circle':
-        return CircleStyle(theme);
+      case 'points':
+        return PointsStyle(theme);
+      case 'winType':
+        return WinTypeStyle(theme);
+      case 'names':
+        return NamesStyle(theme);
       default:
         return DefaultButtonStyle(theme);
     }
@@ -26,7 +48,7 @@ const ScoreModalButton = ({ text, isSelected, onClick, variant }) => {
   return (
     <Button
       variant="outlined"
-      color="success"
+      color="info"
       sx={(theme) => getButtonStyle(theme)}
       onClick={onClick}
     >
