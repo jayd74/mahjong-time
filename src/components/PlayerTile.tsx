@@ -1,9 +1,13 @@
 import { Box, Button, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
-const PlayerTile = () => {
+interface PlayerTileProps {
+  onClick: () => void;
+}
+
+const PlayerTile = ({ onClick }: PlayerTileProps) => {
   return (
-    <Button variant="contained" color="secondary">
+    <Button onClick={onClick} variant="contained" color="secondary">
       <Box
         sx={{
           position: 'absolute',

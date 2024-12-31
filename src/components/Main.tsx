@@ -39,9 +39,7 @@ const Main = () => {
           Outlined Info
         </Button>
       </Box>
-      <Box variant="contained" onClick={handleOpenScoreModal}>
-        <PlayerTile />
-      </Box>
+      <PlayerTile onClick={handleOpenScoreModal} />
       <ScoreModal open={showScoreModal} setShowScoreModal={setShowScoreModal} />
     </Box>
   );

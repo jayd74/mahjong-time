@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Typography, Modal, ButtonGroup } from '@mui/material';
+import { Box, Typography, Modal, ButtonGroup, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ScoreModalButton from '@components/ScoreModalButton';
 
@@ -60,10 +60,10 @@ const ScoreModal = ({ setShowScoreModal, open }) => {
           }}
         >
           <CloseIcon
-            sx={{
+            sx={(theme) => ({
               width: '85%',
-              color: 'white',
-            }}
+              color: theme.palette.primary.light,
+            })}
             onClick={handleCloseModal}
           />
         </Box>
@@ -140,6 +140,15 @@ const ScoreModal = ({ setShowScoreModal, open }) => {
             ))}
           </Box>
         )}
+        <Box>
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ width: '100%', margin: '20px 0', padding: '20px 0' }}
+          >
+            <Typography variant="body1">ADD SCORE</Typography>
+          </Button>
+        </Box>
       </Box>
     </Modal>
   );
