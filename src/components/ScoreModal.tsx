@@ -3,11 +3,21 @@ import { Box, Typography, Modal, ButtonGroup, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ScoreModalButton from '@components/ScoreModalButton';
 
-const ScoreModal = ({ setShowScoreModal, open }) => {
-  const [selectedPointsButton, setSelectedPointsButton] = useState(null);
-  const [selectedWinTypeButton, setSelectedWinTypeButton] =
-    useState('Opponent loss');
-  const [selectedNameButton, setSelectedNameButton] = useState(null);
+interface ScoreModalProps {
+  setShowScoreModal: (value: boolean) => void;
+  open: boolean;
+}
+
+const ScoreModal = ({ setShowScoreModal, open }: ScoreModalProps) => {
+  const [selectedPointsButton, setSelectedPointsButton] = useState<
+    string | null
+  >(null);
+  const [selectedWinTypeButton, setSelectedWinTypeButton] = useState<
+    'Opponent loss' | 'Self draw'
+  >('Opponent loss');
+  const [selectedNameButton, setSelectedNameButton] = useState<string | null>(
+    null
+  );
 
   const handleCloseModal = () => {
     setShowScoreModal(false);
@@ -16,19 +26,21 @@ const ScoreModal = ({ setShowScoreModal, open }) => {
     setSelectedNameButton(null);
   };
 
-  const handlePointsButtonClick = (pointsText) => {
+  const handlePointsButtonClick = (pointsText: string) => {
     setSelectedPointsButton((prev) =>
       prev === pointsText ? null : pointsText
     );
   };
 
-  const handleWinTypeButtonClick = (winTypeText) => {
+  const handleWinTypeButtonClick = (
+    winTypeText: 'Opponent loss' | 'Self draw'
+  ) => {
     setSelectedWinTypeButton((prev) =>
-      prev === winTypeText ? null : winTypeText
+      prev === winTypeText ? 'Opponent loss' : winTypeText
     );
   };
 
-  const handleNameButtonClick = (nameText) => {
+  const handleNameButtonClick = (nameText: string) => {
     setSelectedNameButton((prev) => (prev === nameText ? null : nameText));
   };
 
@@ -109,7 +121,7 @@ const ScoreModal = ({ setShowScoreModal, open }) => {
               width: '100%',
             }}
           >
-            {['Opponent loss', 'Self draw'].map((winTypeText) => (
+            {(['Opponent loss', 'Self draw'] as const).map((winTypeText) => (
               <ScoreModalButton
                 key={winTypeText}
                 variant="winType"

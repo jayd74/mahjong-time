@@ -1,7 +1,19 @@
-import { Button, Typography } from '@mui/material';
+import { Button, Typography, Theme } from '@mui/material';
 
-const ScoreModalButton = ({ text, isSelected, onClick, variant }) => {
-  const PointsStyle = (theme) => ({
+interface ScoreModalButtonProps {
+  text: string;
+  isSelected: boolean;
+  onClick: () => void;
+  variant?: 'points' | 'winType' | 'names';
+}
+
+const ScoreModalButton = ({
+  text,
+  isSelected,
+  onClick,
+  variant,
+}: ScoreModalButtonProps) => {
+  const PointsStyle = (theme: Theme) => ({
     background: isSelected ? theme.palette.primary.dark : 'transparent',
     borderRadius: '50%',
     border: '1px solid #323161',
@@ -10,7 +22,7 @@ const ScoreModalButton = ({ text, isSelected, onClick, variant }) => {
     padding: '0',
   });
 
-  const WinTypeStyle = (theme) => ({
+  const WinTypeStyle = (theme: Theme) => ({
     background: isSelected ? theme.palette.primary.dark : 'transparent',
     borderRadius: '6px',
     border: '1px solid #323161',
@@ -19,7 +31,7 @@ const ScoreModalButton = ({ text, isSelected, onClick, variant }) => {
     padding: '20px 0',
   });
 
-  const NamesStyle = (theme) => ({
+  const NamesStyle = (theme: Theme) => ({
     background: isSelected ? theme.palette.primary.dark : 'transparent',
     borderRadius: '6px',
     border: '1px solid #323161',
@@ -28,11 +40,11 @@ const ScoreModalButton = ({ text, isSelected, onClick, variant }) => {
     padding: '20px 0',
   });
 
-  const DefaultButtonStyle = (theme) => ({
+  const DefaultButtonStyle = (theme: Theme) => ({
     background: theme.palette.primary.light,
   });
 
-  const getButtonStyle = (theme) => {
+  const getButtonStyle = (theme: Theme) => {
     switch (variant) {
       case 'points':
         return PointsStyle(theme);
