@@ -75,6 +75,9 @@ const ScoreModal = ({ setShowScoreModal, open }: ScoreModalProps) => {
             sx={(theme) => ({
               width: '85%',
               color: theme.palette.primary.light,
+              '&:hover': {
+                cursor: 'pointer',
+              },
             })}
             onClick={handleCloseModal}
           />
