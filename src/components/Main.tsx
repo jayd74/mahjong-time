@@ -4,7 +4,7 @@ import PlayerTile from '@components/PlayerTile';
 import ScoreModal from '@components/ScoreModal';
 
 const Main = () => {
-  const [showScoreModal, setShowScoreModal] = useState(true);
+  const [showScoreModal, setShowScoreModal] = useState(false);
 
   const handleOpenScoreModal = () => {
     setShowScoreModal(true);
@@ -39,10 +39,9 @@ const Main = () => {
           Outlined Info
         </Button>
       </Box>
-      <PlayerTile />
-      <Button variant="contained" onClick={handleOpenScoreModal}>
-        Temp Button - Score Modal
-      </Button>
+      <Box variant="contained" onClick={handleOpenScoreModal}>
+        <PlayerTile />
+      </Box>
       <ScoreModal open={showScoreModal} setShowScoreModal={setShowScoreModal} />
     </Box>
   );
