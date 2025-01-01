@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Box, Button, Typography } from '@mui/material';
-import PlayerTile from '@components/PlayerTile';
+import { Box, Button } from '@mui/material';
+import ScoreTable from '@components/ScoreTable';
 import ScoreModal from '@components/ScoreModal';
 
 const Main = () => {
   const [showScoreModal, setShowScoreModal] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
+  const rounds = [0, 1, 2, 3, 4];
 
   const handleOpenScoreModal = (name: string) => {
     setShowScoreModal(true);
@@ -23,40 +24,20 @@ const Main = () => {
         height: '100vh',
       }}
     >
-      <Typography
-        variant="h3"
-        sx={(theme) => ({ color: theme.palette.primary.light })}
-      >
-        🀄️ Mahjong Time! 🀄️
-      </Typography>
-      <Box sx={{ display: 'flex', gap: 1 }}>
-        <Button variant="contained" color="primary">
-          Contained Primary
-        </Button>
-        <Button variant="contained" disabled>
-          Disabled
-        </Button>
-        <Button variant="outlined" color="primary">
-          Contained Secondary
-        </Button>
-        <Button variant="contained" color="warning">
-          Outlined Info
-        </Button>
-      </Box>
       <Box
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          margin: '0 20px',
+          alignItems: 'center',
+          padding: '20px',
         }}
       >
-        {namesList.map((name) => (
-          <PlayerTile
-            key={name}
-            name={name}
-            onClick={() => handleOpenScoreModal(name)}
-          />
-        ))}
+        <Button color="primary" variant="contained">
+          End Game
+        </Button>
+        <Button color="primary" variant="contained">
+          Edit names
+        </Button>
       </Box>
       {selectedPlayer && (
         <ScoreModal
@@ -66,6 +47,7 @@ const Main = () => {
           setShowScoreModal={setShowScoreModal}
         />
       )}
+      <ScoreTable handleOpenScoreModal={handleOpenScoreModal} rounds={rounds} />
     </Box>
   );
 };

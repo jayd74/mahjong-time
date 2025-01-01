@@ -14,6 +14,7 @@ export const colors = {
   black50: 'rgba(0, 0, 0, 0.5)',
   playerTileBackground: '#736BCE1A',
   playerTileBackgroundActive: '#08091D4D',
+  white: '#FFFFFF',
 };
 
 export const theme = createTheme({
@@ -88,6 +89,7 @@ export const theme = createTheme({
           background: `linear-gradient(${colors.purple}, ${colors.purple}) padding-box,
           linear-gradient(to bottom, #434486, #191C40) border-box`,
           color: colors.lightPurple,
+          textTransform: 'uppercase',
           '&:active': {
             background: `linear-gradient(${colors.darkPurple}, ${colors.darkPurple}) padding-box,
             linear-gradient(to bottom, #3D3C7C, #101535) border-box`,
@@ -121,7 +123,7 @@ export const theme = createTheme({
           color: colors.lightPurple,
           height: '140px',
           textShadow: 'none',
-          width: '20%',
+          width: '100%',
           '&:active': {
             background: colors.playerTileBackgroundActive,
           },
@@ -131,11 +133,28 @@ export const theme = createTheme({
           linear-gradient(to bottom, #CB5434, #BC4227) border-box`,
           border: `1px solid transparent`,
           color: colors.lightRed,
+          textTransform: 'uppercase',
           '&:active': {
             background: `linear-gradient(${colors.darkRed}, ${colors.darkRed}) padding-box,
             linear-gradient(to bottom, #AF5035, #A23E22) border-box`,
             textShadow: 'none',
           },
+        },
+      },
+    },
+    MuiButtonGroup: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          borderBottom: 'none',
+          textAlign: 'center',
+          height: '32px',
+          margin: '10px',
+          width: '25%',
         },
       },
     },

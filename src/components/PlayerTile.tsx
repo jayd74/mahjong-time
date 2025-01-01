@@ -2,13 +2,14 @@ import { Box, Button, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
 interface PlayerTileProps {
-  onClick: () => void;
   name: string;
+  score: number;
+  onClick?: () => void;
 }
 
-const PlayerTile = ({ onClick, name }: PlayerTileProps) => {
+const PlayerTile = ({ name, score, onClick }: PlayerTileProps) => {
   return (
-    <Button onClick={onClick} variant="contained" color="secondary">
+    <Button variant="contained" color="secondary" onClick={onClick}>
       <Box
         sx={{
           position: 'absolute',
@@ -44,7 +45,7 @@ const PlayerTile = ({ onClick, name }: PlayerTileProps) => {
             color: theme.palette.success.main,
           })}
         >
-          192
+          {score}
         </Typography>
       </Box>
     </Button>
