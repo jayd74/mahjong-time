@@ -3,7 +3,7 @@ import { Box, Button } from '@mui/material';
 import ScoreTable from '@components/ScoreTable';
 import ScoreModal from '@components/ScoreModal';
 import EditPlayerModal from '@components/EditPlayerModal';
-import scores, { defaultScoreBoard } from '@shared/constants';
+import { scores, defaultScoreBoard, defaultNamesList } from '@shared/constants';
 import { Score, ScoreType, WinType } from '@shared/types';
 
 const Main = () => {
@@ -12,12 +12,7 @@ const Main = () => {
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
   const [rounds, setRounds] = useState<number[]>([]);
   const [showEditPlayerModal, setShowEditPlayerModal] = useState(false);
-  const [namesList, setNamesList] = useState<string[]>([
-    'Veronica',
-    'Jason',
-    'Caroline',
-    'Victoria',
-  ]);
+  const [namesList, setNamesList] = useState<string[]>(defaultNamesList);
 
   useEffect(() => {
     const savedNames = localStorage.getItem('playerNames');

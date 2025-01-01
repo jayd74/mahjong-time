@@ -8,7 +8,7 @@ export const defaultScoreBoard: Player[] = [
     id: 1,
   },
   {
-    name: 'Jason',
+    name: 'Derek',
     totalScore: 0,
     scores: [],
     id: 2,
@@ -27,7 +27,9 @@ export const defaultScoreBoard: Player[] = [
   },
 ];
 
-const scores: Scores = {
+export const defaultNamesList = ['Veronica', 'Derek', 'Victoria', 'Caroline'];
+
+export const scores: Scores = {
   3: {
     opponentLoss: 32,
     selfDraw: 16,
@@ -69,5 +71,3 @@ const scores: Scores = {
     coverAll: 768,
   },
 };
-
-export default scores;

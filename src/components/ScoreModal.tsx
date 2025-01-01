@@ -3,7 +3,7 @@ import { Box, Typography, Modal, ButtonGroup, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ScoreModalButton from '@components/ScoreModalButton';
 import { WinType } from '@shared/types';
-import scores from '@shared/constants';
+import { scores } from '@shared/constants';
 
 interface ScoreModalProps {
   setShowScoreModal: (value: boolean) => void;
@@ -31,11 +31,10 @@ const ScoreModal = ({
   );
   const [selectedName, setSelectedName] = useState<string | null>(null);
 
-  const getNameList = () =>
+  const opponents =
     selectedWinType === WinType.OPPONENT
-      ? namesList
+      ? namesList.filter((player) => player !== name)
       : ['All Players', ...namesList];
-
   const handleCloseModal = () => {
     setShowScoreModal(false);
     setSelectedPoints(null);
@@ -163,7 +162,7 @@ const ScoreModal = ({
             alignContent: 'center',
           }}
         >
-          {getNameList().map((nameText) => (
+          {opponents.map((nameText) => (
             <ScoreModalButton
               key={nameText}
               variant="names"
