@@ -2,18 +2,24 @@ import { useState } from 'react';
 import { Box, Button } from '@mui/material';
 import ScoreTable from '@components/ScoreTable';
 import ScoreModal from '@components/ScoreModal';
+import EditPlayerModal from '@components/EditPlayerModal';
 
 const Main = () => {
   const [showScoreModal, setShowScoreModal] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
   const rounds = [0, 1, 2, 3, 4];
+  const [showEditPlayerModal, setShowEditPlayerModal] = useState(true);
+  const [namesList, setNamesList] = useState([
+    'Veronica',
+    'Jason',
+    'Caroline',
+    'Victoria',
+  ]);
 
   const handleOpenScoreModal = (name: string) => {
     setShowScoreModal(true);
     setSelectedPlayer(name);
   };
-
-  const namesList = ['Veronica', 'Jason', 'Caroline', 'Victoria'];
 
   return (
     <Box
@@ -24,6 +30,16 @@ const Main = () => {
         height: '100vh',
       }}
     >
+
+      {showEditPlayerModal && (
+        <EditPlayerModal
+          open={showEditPlayerModal}
+          setShowEditPlayerModal={setShowEditPlayerModal}
+          namesList={namesList}
+          setNamesList={setNamesList}
+        />
+      )}
+
       <Box
         sx={{
           display: 'flex',
