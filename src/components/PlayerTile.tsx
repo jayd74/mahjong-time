@@ -3,9 +3,10 @@ import AddIcon from '@mui/icons-material/Add';
 
 interface PlayerTileProps {
   onClick: () => void;
+  name: string;
 }
 
-const PlayerTile = ({ onClick }: PlayerTileProps) => {
+const PlayerTile = ({ onClick, name }: PlayerTileProps) => {
   return (
     <Button onClick={onClick} variant="contained" color="secondary">
       <Box
@@ -35,7 +36,7 @@ const PlayerTile = ({ onClick }: PlayerTileProps) => {
             color: theme.palette.primary.light,
           })}
         >
-          Victoria
+          {name}
         </Typography>
         <Typography
           variant="h3"

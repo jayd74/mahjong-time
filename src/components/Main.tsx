@@ -5,10 +5,14 @@ import ScoreModal from '@components/ScoreModal';
 
 const Main = () => {
   const [showScoreModal, setShowScoreModal] = useState(false);
+  const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
 
-  const handleOpenScoreModal = () => {
+  const handleOpenScoreModal = (name: string) => {
     setShowScoreModal(true);
+    setSelectedPlayer(name);
   };
+
+  const namesList = ['Veronica', 'Jason', 'Caroline', 'Victoria'];
 
   return (
     <Box
@@ -39,8 +43,29 @@ const Main = () => {
           Outlined Info
         </Button>
       </Box>
-      <PlayerTile onClick={handleOpenScoreModal} />
-      <ScoreModal open={showScoreModal} setShowScoreModal={setShowScoreModal} />
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          margin: '0 20px',
+        }}
+      >
+        {namesList.map((name) => (
+          <PlayerTile
+            key={name}
+            name={name}
+            onClick={() => handleOpenScoreModal(name)}
+          />
+        ))}
+      </Box>
+      {selectedPlayer && (
+        <ScoreModal
+          open={showScoreModal}
+          name={selectedPlayer}
+          namesList={namesList.filter((name) => name !== selectedPlayer)}
+          setShowScoreModal={setShowScoreModal}
+        />
+      )}
     </Box>
   );
 };
