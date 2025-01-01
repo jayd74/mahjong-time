@@ -29,9 +29,7 @@ const ScoreModal = ({
   const [selectedWinType, setSelectedWinType] = useState<WinType>(
     WinType.OPPONENT
   );
-  const [selectedName, setSelectedName] = useState<string | null>(
-    'All Players'
-  );
+  const [selectedName, setSelectedName] = useState<string | null>(null);
 
   const getNameList = () =>
     selectedWinType === WinType.OPPONENT
@@ -61,6 +59,11 @@ const ScoreModal = ({
 
   const handleNameButtonClick = (nameText: string) => {
     setSelectedName(nameText);
+  };
+
+  const handleAddScoreClick = () => {
+    handleAddScore(selectedPoints || '', selectedWinType, name, selectedName);
+    handleCloseModal();
   };
 
   const ScoreModalStyle = {
@@ -175,14 +178,7 @@ const ScoreModal = ({
             variant="contained"
             color="primary"
             sx={{ width: '100%', margin: '20px 0', padding: '20px 0' }}
-            onClick={() =>
-              handleAddScore(
-                selectedPoints || '',
-                selectedWinType,
-                name,
-                selectedName
-              )
-            }
+            onClick={handleAddScoreClick}
             disabled={!selectedPoints || !selectedName}
           >
             <Typography variant="body1">ADD SCORE</Typography>

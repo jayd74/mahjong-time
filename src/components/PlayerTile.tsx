@@ -8,6 +8,16 @@ interface PlayerTileProps {
 }
 
 const PlayerTile = ({ name, score, onClick }: PlayerTileProps) => {
+  const getScoreColor = (score: number) => {
+    if (score > 0) {
+      return 'success';
+    } else if (score < 0) {
+      return 'error';
+    } else {
+      return 'white';
+    }
+  };
+
   return (
     <Button variant="contained" color="secondary" onClick={onClick}>
       <Box
@@ -39,13 +49,8 @@ const PlayerTile = ({ name, score, onClick }: PlayerTileProps) => {
         >
           {name}
         </Typography>
-        <Typography
-          variant="h3"
-          sx={(theme) => ({
-            color: theme.palette.success.main,
-          })}
-        >
-          {score}
+        <Typography variant="h3" color={getScoreColor(score)}>
+          {Math.abs(score)}
         </Typography>
       </Box>
     </Button>
