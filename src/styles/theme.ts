@@ -142,6 +142,11 @@ export const theme = createTheme({
         },
       },
     },
+    MuiButtonGroup: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
     MuiTableCell: {
       styleOverrides: {
         root: {
