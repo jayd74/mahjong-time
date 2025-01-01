@@ -7,9 +7,16 @@ import { WinType } from '@shared/types';
 interface ScoreModalProps {
   setShowScoreModal: (value: boolean) => void;
   open: boolean;
+  name: string;
+  namesList: string[];
 }
 
-const ScoreModal = ({ setShowScoreModal, open }: ScoreModalProps) => {
+const ScoreModal = ({
+  setShowScoreModal,
+  open,
+  name,
+  namesList,
+}: ScoreModalProps) => {
   const [selectedPointsButton, setSelectedPointsButton] = useState<
     string | null
   >(null);
@@ -20,7 +27,6 @@ const ScoreModal = ({ setShowScoreModal, open }: ScoreModalProps) => {
     'All Players'
   );
 
-  const namesList = ['Veronica', 'Jason', 'Caroline'];
   const getNameList = () =>
     selectedWinTypeButton === WinType.OPPONENT
       ? namesList
@@ -101,7 +107,7 @@ const ScoreModal = ({ setShowScoreModal, open }: ScoreModalProps) => {
             margin: '30px 0',
           })}
         >
-          Add winning score for Victoria
+          Add winning score for {name}
         </Typography>
         <Box
           sx={{
