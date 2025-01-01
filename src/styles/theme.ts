@@ -147,6 +147,16 @@ export const theme = createTheme({
         disableRipple: true,
       },
     },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          userSelect: 'none',
+          MozUserSelect: 'none',
+          msUserSelect: 'none',
+          WebkitUserSelect: 'none',
+        },
+      },
+    },
     MuiTableCell: {
       styleOverrides: {
         root: {

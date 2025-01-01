@@ -51,6 +51,7 @@ const Main = () => {
     loser: string | null
   ) => {
     const selectedPoints = scores[parseInt(points)];
+    // TODO: Refactor this to be more DRY
     if (winType) {
       const camelCaseWinType = winTypeMapping[
         winType
