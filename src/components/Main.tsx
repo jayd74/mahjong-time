@@ -74,12 +74,12 @@ const Main = () => {
           scoreData.forEach((player) => {
             if (player.name === winner) {
               player.totalScore += winScore.value;
-              player.scores.push(winScore);
+              player.scores.unshift(winScore);
             } else if (player.name === loser) {
               player.totalScore -= loseScore.value;
-              player.scores.push(loseScore);
+              player.scores.unshift(loseScore);
             } else {
-              player.scores.push(noScore);
+              player.scores.unshift(noScore);
             }
           });
         } else {
@@ -96,10 +96,10 @@ const Main = () => {
           scoreData.forEach((player) => {
             if (player.name === winner) {
               player.totalScore += winScore.value;
-              player.scores.push(winScore);
+              player.scores.unshift(winScore);
             } else {
               player.totalScore -= loseScore.value;
-              player.scores.push(loseScore);
+              player.scores.unshift(loseScore);
             }
           });
         }
@@ -119,12 +119,12 @@ const Main = () => {
         scoreData.forEach((player) => {
           if (player.name === winner) {
             player.totalScore += winScore.value;
-            player.scores.push(winScore);
+            player.scores.unshift(winScore);
           } else if (player.name === loser) {
             player.totalScore -= loseScore.value;
-            player.scores.push(loseScore);
+            player.scores.unshift(loseScore);
           } else {
-            player.scores.push(noScore);
+            player.scores.unshift(noScore);
           }
         });
       }
