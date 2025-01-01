@@ -38,6 +38,11 @@ export const theme = createTheme({
     success: {
       main: colors.lightGreen,
     },
+    info: {
+      main: colors.borderPurple,
+      light: colors.lightPurple,
+      dark: colors.darkPurple,
+    },
     error: {
       main: colors.red,
       light: colors.lightRed,
