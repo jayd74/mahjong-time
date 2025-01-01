@@ -102,6 +102,7 @@ const Main = () => {
               player.totalScore += winScore.value;
               player.scores.push(winScore);
             } else {
+              player.totalScore -= loseScore.value;
               player.scores.push(loseScore);
             }
           });
