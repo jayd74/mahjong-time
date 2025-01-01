@@ -1,19 +1,7 @@
 import { useState } from 'react';
-import {
-  Box,
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from '@mui/material';
-import PlayerTile from '@components/PlayerTile';
+import { Box, Button } from '@mui/material';
+import ScoreTable from '@components/ScoreTable';
 import ScoreModal from '@components/ScoreModal';
-import { defaultScoreBoard } from '@shared/constants';
-import { getScoreColor } from 'src/utils/scoreUtils';
 
 const Main = () => {
   const [showScoreModal, setShowScoreModal] = useState(false);
@@ -51,13 +39,6 @@ const Main = () => {
           Edit names
         </Button>
       </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          margin: '0 20px',
-        }}
-      ></Box>
       {selectedPlayer && (
         <ScoreModal
           open={showScoreModal}
@@ -66,41 +47,7 @@ const Main = () => {
           setShowScoreModal={setShowScoreModal}
         />
       )}
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              {defaultScoreBoard.map(({ id, name, totalScore }) => (
-                <TableCell key={id}>
-                  <PlayerTile
-                    name={name}
-                    score={totalScore}
-                    onClick={() => handleOpenScoreModal(name)}
-                  />
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rounds.map((round) => {
-              return (
-                <TableRow key={round}>
-                  {defaultScoreBoard.map(({ id, scores }) => (
-                    <TableCell key={id}>
-                      <Typography
-                        variant="h5"
-                        color={getScoreColor(scores[round].type)}
-                      >
-                        {scores[round].value || '-'}
-                      </Typography>
-                    </TableCell>
-                  ))}
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <ScoreTable handleOpenScoreModal={handleOpenScoreModal} rounds={rounds} />
     </Box>
   );
 };
