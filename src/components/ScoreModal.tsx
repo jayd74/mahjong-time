@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Box, Typography, Modal, ButtonGroup, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ScoreModalButton from '@components/ScoreModalButton';
+import { WinType } from '@shared/types';
 
 interface ScoreModalProps {
   setShowScoreModal: (value: boolean) => void;
@@ -12,17 +13,23 @@ const ScoreModal = ({ setShowScoreModal, open }: ScoreModalProps) => {
   const [selectedPointsButton, setSelectedPointsButton] = useState<
     string | null
   >(null);
-  const [selectedWinTypeButton, setSelectedWinTypeButton] = useState<
-    'Opponent loss' | 'Self draw'
-  >('Opponent loss');
-  const [selectedNameButton, setSelectedNameButton] = useState<string | null>(
-    null
+  const [selectedWinTypeButton, setSelectedWinTypeButton] = useState<WinType>(
+    WinType.OPPONENT
   );
+  const [selectedNameButton, setSelectedNameButton] = useState<string | null>(
+    'All Players'
+  );
+
+  const namesList = ['Veronica', 'Jason', 'Caroline'];
+  const getNameList = () =>
+    selectedWinTypeButton === WinType.OPPONENT
+      ? namesList
+      : ['All Players', ...namesList];
 
   const handleCloseModal = () => {
     setShowScoreModal(false);
     setSelectedPointsButton(null);
-    setSelectedWinTypeButton('Opponent loss');
+    setSelectedWinTypeButton(WinType.OPPONENT);
     setSelectedNameButton(null);
   };
 
@@ -32,12 +39,16 @@ const ScoreModal = ({ setShowScoreModal, open }: ScoreModalProps) => {
     );
   };
 
-  const handleWinTypeButtonClick = (
-    winTypeText: 'Opponent loss' | 'Self draw'
-  ) => {
+  const handleWinTypeButtonClick = (winTypeText: WinType) => {
     setSelectedWinTypeButton((prev) =>
-      prev === winTypeText ? 'Opponent loss' : winTypeText
+      prev === winTypeText ? WinType.OPPONENT : winTypeText
     );
+
+    if (winTypeText === WinType.OPPONENT) {
+      setSelectedNameButton(null);
+    } else {
+      setSelectedNameButton('All Players');
+    }
   };
 
   const handleNameButtonClick = (nameText: string) => {
@@ -100,17 +111,15 @@ const ScoreModal = ({ setShowScoreModal, open }: ScoreModalProps) => {
             alignContent: 'center',
           }}
         >
-          {['3番', '4番', '5番', '6番', '7番', '8番', '9番', '10番'].map(
-            (pointsText) => (
-              <ScoreModalButton
-                key={pointsText}
-                variant="points"
-                text={pointsText}
-                isSelected={selectedPointsButton === pointsText}
-                onClick={() => handlePointsButtonClick(pointsText)}
-              />
-            )
-          )}
+          {['3', '4', '5', '6', '7', '8', '9', '10'].map((pointsText) => (
+            <ScoreModalButton
+              key={pointsText}
+              variant="points"
+              text={`${pointsText}番`}
+              isSelected={selectedPointsButton === pointsText}
+              onClick={() => handlePointsButtonClick(pointsText)}
+            />
+          ))}
         </Box>
         <Box
           sx={{
@@ -124,37 +133,35 @@ const ScoreModal = ({ setShowScoreModal, open }: ScoreModalProps) => {
               width: '100%',
             }}
           >
-            {(['Opponent loss', 'Self draw'] as const).map((winTypeText) => (
+            {Object.values(WinType).map((winType) => (
               <ScoreModalButton
-                key={winTypeText}
+                key={winType}
                 variant="winType"
-                text={winTypeText}
-                isSelected={selectedWinTypeButton === winTypeText}
-                onClick={() => handleWinTypeButtonClick(winTypeText)}
+                text={winType}
+                isSelected={selectedWinTypeButton === winType}
+                onClick={() => handleWinTypeButtonClick(winType)}
               />
             ))}
           </ButtonGroup>
         </Box>
-        {selectedWinTypeButton === 'Opponent loss' && (
-          <Box
-            sx={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignContent: 'center',
-            }}
-          >
-            {['Veronica', 'Jason', 'Caroline'].map((nameText) => (
-              <ScoreModalButton
-                key={nameText}
-                variant="names"
-                text={nameText}
-                isSelected={selectedNameButton === nameText}
-                onClick={() => handleNameButtonClick(nameText)}
-              />
-            ))}
-          </Box>
-        )}
+        <Box
+          sx={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignContent: 'center',
+          }}
+        >
+          {getNameList().map((nameText) => (
+            <ScoreModalButton
+              key={nameText}
+              variant="names"
+              text={nameText}
+              isSelected={selectedNameButton === nameText}
+              onClick={() => handleNameButtonClick(nameText)}
+            />
+          ))}
+        </Box>
         <Box>
           <Button
             variant="contained"
