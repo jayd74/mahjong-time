@@ -83,7 +83,7 @@ export const theme = createTheme({
           padding: '8px 22px',
           border: `1px solid transparent`,
           textShadow: `1px 1px 1px ${colors.black50}`,
-          textTransform: 'capitalize',
+          textTransform: 'initial',
         },
         containedPrimary: {
           background: `linear-gradient(${colors.purple}, ${colors.purple}) padding-box,

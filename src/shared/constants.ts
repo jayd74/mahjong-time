@@ -1,52 +1,73 @@
-import { Player, ScoreType } from '@shared/types';
+import { Player, Scores } from '@shared/types';
 
 export const defaultScoreBoard: Player[] = [
   {
     name: 'Veronica',
     totalScore: 0,
-    scores: [
-      { type: ScoreType.LOSE, value: 128 },
-      { type: null, value: 0 },
-      { type: ScoreType.WIN, value: 96 },
-      { type: ScoreType.WIN, value: 96 },
-      { type: null, value: 0 },
-    ],
+    scores: [],
     id: 1,
   },
   {
     name: 'Jason',
     totalScore: 0,
-    scores: [
-      { type: null, value: 0 },
-      { type: ScoreType.LOSE, value: 96 },
-      { type: ScoreType.LOSE, value: 96 },
-      { type: ScoreType.LOSE, value: 96 },
-      { type: null, value: 0 },
-    ],
+    scores: [],
     id: 2,
   },
   {
     name: 'Victoria',
     totalScore: 0,
-    scores: [
-      { type: ScoreType.WIN, value: 128 },
-      { type: null, value: 0 },
-      { type: null, value: 0 },
-      { type: null, value: 0 },
-      { type: null, value: 0 },
-    ],
+    scores: [],
     id: 3,
   },
   {
     name: 'Caroline',
     totalScore: 0,
-    scores: [
-      { type: null, value: 0 },
-      { type: ScoreType.WIN, value: 96 },
-      { type: null, value: 0 },
-      { type: null, value: 0 },
-      { type: ScoreType.LOSE, value: 128 },
-    ],
+    scores: [],
     id: 4,
   },
 ];
+
+const scores: Scores = {
+  3: {
+    opponentLoss: 32,
+    selfDraw: 16,
+    coverAll: 48,
+  },
+  4: {
+    opponentLoss: 64,
+    selfDraw: 32,
+    coverAll: 96,
+  },
+  5: {
+    opponentLoss: 96,
+    selfDraw: 48,
+    coverAll: 144,
+  },
+  6: {
+    opponentLoss: 128,
+    selfDraw: 64,
+    coverAll: 192,
+  },
+  7: {
+    opponentLoss: 192,
+    selfDraw: 96,
+    coverAll: 288,
+  },
+  8: {
+    opponentLoss: 256,
+    selfDraw: 128,
+    coverAll: 288,
+  },
+  9: {
+    opponentLoss: 384,
+    selfDraw: 192,
+    coverAll: 384,
+  },
+  10: {
+    opponentLoss: 512,
+    selfDraw: 256,
+    coverAll: 768,
+  },
+};
+
+export default scores;

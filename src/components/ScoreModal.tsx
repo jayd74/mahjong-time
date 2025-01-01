@@ -3,12 +3,19 @@ import { Box, Typography, Modal, ButtonGroup, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import ScoreModalButton from '@components/ScoreModalButton';
 import { WinType } from '@shared/types';
+import scores from '@shared/constants';
 
 interface ScoreModalProps {
   setShowScoreModal: (value: boolean) => void;
   open: boolean;
   name: string;
   namesList: string[];
+  handleAddScore: (
+    points: string,
+    winType: WinType | null,
+    winner: string | null,
+    loser: string | null
+  ) => void;
 }
 
 const ScoreModal = ({
@@ -16,45 +23,44 @@ const ScoreModal = ({
   open,
   name,
   namesList,
+  handleAddScore,
 }: ScoreModalProps) => {
-  const [selectedPointsButton, setSelectedPointsButton] = useState<
-    string | null
-  >(null);
-  const [selectedWinTypeButton, setSelectedWinTypeButton] = useState<WinType>(
+  const [selectedPoints, setSelectedPoints] = useState<string | null>(null);
+  const [selectedWinType, setSelectedWinType] = useState<WinType>(
     WinType.OPPONENT
   );
-  const [selectedNameButton, setSelectedNameButton] = useState<string | null>(
+  const [selectedName, setSelectedName] = useState<string | null>(
     'All Players'
   );
 
   const getNameList = () =>
-    selectedWinTypeButton === WinType.OPPONENT
+    selectedWinType === WinType.OPPONENT
       ? namesList
       : ['All Players', ...namesList];
 
   const handleCloseModal = () => {
     setShowScoreModal(false);
-    setSelectedPointsButton(null);
-    setSelectedWinTypeButton(WinType.OPPONENT);
-    setSelectedNameButton(null);
+    setSelectedPoints(null);
+    setSelectedWinType(WinType.OPPONENT);
+    setSelectedName(null);
   };
 
   const handlePointsButtonClick = (pointsText: string) => {
-    setSelectedPointsButton(pointsText);
+    setSelectedPoints(pointsText);
   };
 
   const handleWinTypeButtonClick = (winTypeText: WinType) => {
-    setSelectedWinTypeButton(winTypeText);
+    setSelectedWinType(winTypeText);
 
     if (winTypeText === WinType.OPPONENT) {
-      setSelectedNameButton(null);
+      setSelectedName(null);
     } else {
-      setSelectedNameButton('All Players');
+      setSelectedName('All Players');
     }
   };
 
   const handleNameButtonClick = (nameText: string) => {
-    setSelectedNameButton(nameText);
+    setSelectedName(nameText);
   };
 
   const ScoreModalStyle = {
@@ -113,12 +119,12 @@ const ScoreModal = ({
             alignContent: 'center',
           }}
         >
-          {['3', '4', '5', '6', '7', '8', '9', '10'].map((pointsText) => (
+          {Object.keys(scores).map((pointsText) => (
             <ScoreModalButton
               key={pointsText}
               variant="points"
               text={`${pointsText}番`}
-              isSelected={selectedPointsButton === pointsText}
+              isSelected={selectedPoints === pointsText}
               onClick={() => handlePointsButtonClick(pointsText)}
             />
           ))}
@@ -140,7 +146,7 @@ const ScoreModal = ({
                 key={winType}
                 variant="winType"
                 text={winType}
-                isSelected={selectedWinTypeButton === winType}
+                isSelected={selectedWinType === winType}
                 onClick={() => handleWinTypeButtonClick(winType)}
               />
             ))}
@@ -159,7 +165,7 @@ const ScoreModal = ({
               key={nameText}
               variant="names"
               text={nameText}
-              isSelected={selectedNameButton === nameText}
+              isSelected={selectedName === nameText}
               onClick={() => handleNameButtonClick(nameText)}
             />
           ))}
@@ -169,6 +175,15 @@ const ScoreModal = ({
             variant="contained"
             color="primary"
             sx={{ width: '100%', margin: '20px 0', padding: '20px 0' }}
+            onClick={() =>
+              handleAddScore(
+                selectedPoints || '',
+                selectedWinType,
+                name,
+                selectedName
+              )
+            }
+            disabled={!selectedPoints || !selectedName}
           >
             <Typography variant="body1">ADD SCORE</Typography>
           </Button>
