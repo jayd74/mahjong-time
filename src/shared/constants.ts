@@ -8,7 +8,7 @@ export const defaultScoreBoard: Player[] = [
     id: 1,
   },
   {
-    name: 'Derek',
+    name: 'JD',
     totalScore: 0,
     scores: [],
     id: 2,
@@ -27,7 +27,7 @@ export const defaultScoreBoard: Player[] = [
   },
 ];
 
-export const defaultNamesList = ['Veronica', 'Derek', 'Victoria', 'Caroline'];
+export const defaultNamesList = ['Veronica', 'JD', 'Victoria', 'Caroline'];
 
 export const scores: Scores = {
   3: {

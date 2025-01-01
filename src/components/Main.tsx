@@ -4,7 +4,7 @@ import ScoreTable from '@components/ScoreTable';
 import ScoreModal from '@components/ScoreModal';
 import EditPlayerModal from '@components/EditPlayerModal';
 import { scores, defaultScoreBoard, defaultNamesList } from '@shared/constants';
-import { Score, ScoreType, WinType } from '@shared/types';
+import { Player, Score, ScoreType, WinType } from '@shared/types';
 
 const Main = () => {
   const [scoreData, setScoreData] = useState(defaultScoreBoard);
@@ -15,15 +15,28 @@ const Main = () => {
   const [namesList, setNamesList] = useState<string[]>(defaultNamesList);
 
   useEffect(() => {
-    const savedNames = localStorage.getItem('playerNames');
-    if (savedNames) {
-      setNamesList(JSON.parse(savedNames));
+    const playerNames = localStorage.getItem('playerNames');
+    const storedScoreData = localStorage.getItem('scoreData');
+    if (storedScoreData) {
+      setScoreData(JSON.parse(storedScoreData));
+
+      const playerScore = JSON.parse(storedScoreData).find(
+        (player: Player) => player.scores
+      );
+      const rounds =
+        playerScore?.scores.map((_player: Player, index: number) => index) ||
+        [];
+      setRounds(rounds);
+    }
+    if (playerNames) {
+      setNamesList(JSON.parse(playerNames));
     }
   }, []);
 
   useEffect(() => {
     localStorage.setItem('playerNames', JSON.stringify(namesList));
-  }, [namesList]);
+    localStorage.setItem('scoreData', JSON.stringify(scoreData));
+  }, [namesList, scoreData]);
 
   const handleNameChange = (index: number, newName: string) => {
     setNamesList((prevNames) => {
@@ -130,6 +143,7 @@ const Main = () => {
       }
 
       setScoreData([...scoreData]);
+      localStorage.setItem('scoreData', JSON.stringify(scoreData));
     }
 
     setShowScoreModal(false);

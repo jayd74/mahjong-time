@@ -25,8 +25,8 @@ const ScoreTable = ({
   scoreData,
 }: ScoreTableProps) => {
   return (
-    <TableContainer>
-      <Table>
+    <TableContainer sx={{ maxHeight: 'calc(100vh - 82.5px)' }}>
+      <Table stickyHeader>
         <TableHead>
           <TableRow>
             {namesList.map((name, index) => {
