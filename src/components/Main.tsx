@@ -1,15 +1,88 @@
 import { useState } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@mui/material';
 import PlayerTile from '@components/PlayerTile';
+import { Player } from '@shared/types';
 import ScoreModal from '@components/ScoreModal';
+
+const defaultScoreBoard: Player[] = [
+  {
+    name: 'Veronica',
+    totalScore: 0,
+    scores: [
+      { type: 'lose', value: 128 },
+      { type: null, value: 0 },
+      { type: 'win', value: 96 },
+      { type: 'win', value: 96 },
+      { type: null, value: 0 },
+    ],
+    id: 1,
+  },
+  {
+    name: 'Jason',
+    totalScore: 0,
+    scores: [
+      { type: null, value: 0 },
+      { type: 'lose', value: 96 },
+      { type: 'lose', value: 96 },
+      { type: 'lose', value: 96 },
+      { type: null, value: 0 },
+    ],
+    id: 2,
+  },
+  {
+    name: 'Victoria',
+    totalScore: 0,
+    scores: [
+      { type: 'win', value: 128 },
+      { type: null, value: 0 },
+      { type: null, value: 0 },
+      { type: null, value: 0 },
+      { type: null, value: 0 },
+    ],
+    id: 3,
+  },
+  {
+    name: 'Caroline',
+    totalScore: 0,
+    scores: [
+      { type: null, value: 0 },
+      { type: 'win', value: 96 },
+      { type: null, value: 0 },
+      { type: null, value: 0 },
+      { type: 'lose', value: 128 },
+    ],
+    id: 4,
+  },
+];
 
 const Main = () => {
   const [showScoreModal, setShowScoreModal] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
+  const rounds = [0, 1, 2, 3, 4];
 
   const handleOpenScoreModal = (name: string) => {
     setShowScoreModal(true);
     setSelectedPlayer(name);
+  };
+  const getScoreColor = (type: 'win' | 'lose' | null) => {
+    switch (type) {
+      case 'win':
+        return 'success';
+      case 'lose':
+        return 'error';
+      default:
+        return 'info';
+    }
   };
 
   const namesList = ['Veronica', 'Jason', 'Caroline', 'Victoria'];
@@ -23,24 +96,19 @@ const Main = () => {
         height: '100vh',
       }}
     >
-      <Typography
-        variant="h3"
-        sx={(theme) => ({ color: theme.palette.primary.light })}
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '20px',
+        }}
       >
-        🀄️ Mahjong Time! 🀄️
-      </Typography>
-      <Box sx={{ display: 'flex', gap: 1 }}>
-        <Button variant="contained" color="primary">
-          Contained Primary
+        <Button color="primary" variant="contained">
+          End Game
         </Button>
-        <Button variant="contained" disabled>
-          Disabled
-        </Button>
-        <Button variant="outlined" color="primary">
-          Contained Secondary
-        </Button>
-        <Button variant="contained" color="warning">
-          Outlined Info
+        <Button color="primary" variant="contained">
+          Edit names
         </Button>
       </Box>
       <Box
@@ -49,15 +117,7 @@ const Main = () => {
           justifyContent: 'space-between',
           margin: '0 20px',
         }}
-      >
-        {namesList.map((name) => (
-          <PlayerTile
-            key={name}
-            name={name}
-            onClick={() => handleOpenScoreModal(name)}
-          />
-        ))}
-      </Box>
+      ></Box>
       {selectedPlayer && (
         <ScoreModal
           open={showScoreModal}
@@ -66,6 +126,41 @@ const Main = () => {
           setShowScoreModal={setShowScoreModal}
         />
       )}
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              {defaultScoreBoard.map(({ id, name, totalScore }) => (
+                <TableCell key={id}>
+                  <PlayerTile
+                    name={name}
+                    score={totalScore}
+                    onClick={() => handleOpenScoreModal(name)}
+                  />
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rounds.map((round) => {
+              return (
+                <TableRow key={round}>
+                  {defaultScoreBoard.map(({ id, scores }) => (
+                    <TableCell key={id}>
+                      <Typography
+                        variant="h5"
+                        color={getScoreColor(scores[round].type)}
+                      >
+                        {scores[round].value || '-'}
+                      </Typography>
+                    </TableCell>
+                  ))}
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Box>
   );
 };
