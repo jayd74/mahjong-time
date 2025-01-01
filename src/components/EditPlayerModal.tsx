@@ -1,6 +1,6 @@
 import { Box, Typography, Modal, Input, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface EditPlayerModalProps {
   open: boolean;
@@ -29,6 +29,10 @@ const EditPlayerModal = ({
 }: EditPlayerModalProps) => {
   const [editedNames, setEditedNames] = useState<string[]>(namesList);
 
+  useEffect(() => {
+    setEditedNames(namesList);
+  }, [namesList]);
+
   const handleEditPlayerModalClose = () => {
     setShowEditPlayerModal(false);
   };
@@ -40,6 +44,15 @@ const EditPlayerModal = ({
   };
 
   const handleSaveChanges = () => {
+    if (editedNames.some((name) => !name.trim())) {
+      alert('Player names cannot be empty.');
+      return;
+    }
+    if (new Set(editedNames).size !== editedNames.length) {
+      alert('Player names must be unique.');
+      return;
+    }
+
     setNamesList(editedNames);
     handleEditPlayerModalClose();
   };

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Button } from '@mui/material';
 import ScoreTable from '@components/ScoreTable';
 import ScoreModal from '@components/ScoreModal';
@@ -8,13 +8,24 @@ const Main = () => {
   const [showScoreModal, setShowScoreModal] = useState(false);
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
   const rounds = [0, 1, 2, 3, 4];
-  const [showEditPlayerModal, setShowEditPlayerModal] = useState(true);
-  const [namesList, setNamesList] = useState([
+  const [showEditPlayerModal, setShowEditPlayerModal] = useState(false);
+  const [namesList, setNamesList] = useState<string[]>([
     'Veronica',
     'Jason',
     'Caroline',
     'Victoria',
   ]);
+
+  useEffect(() => {
+    const savedNames = localStorage.getItem('playerNames');
+    if (savedNames) {
+      setNamesList(JSON.parse(savedNames));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('playerNames', JSON.stringify(namesList));
+  }, [namesList]);
 
   const handleOpenScoreModal = (name: string) => {
     setShowScoreModal(true);
@@ -30,6 +41,13 @@ const Main = () => {
         height: '100vh',
       }}
     >
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => setShowEditPlayerModal(true)}
+      >
+        Edit Player Names
+      </Button>
 
       {showEditPlayerModal && (
         <EditPlayerModal
@@ -55,6 +73,7 @@ const Main = () => {
           Edit names
         </Button>
       </Box>
+
       {selectedPlayer && (
         <ScoreModal
           open={showScoreModal}
