@@ -11,59 +11,9 @@ import {
   Typography,
 } from '@mui/material';
 import PlayerTile from '@components/PlayerTile';
-import { Player } from '@shared/types';
 import ScoreModal from '@components/ScoreModal';
-
-const defaultScoreBoard: Player[] = [
-  {
-    name: 'Veronica',
-    totalScore: 0,
-    scores: [
-      { type: 'lose', value: 128 },
-      { type: null, value: 0 },
-      { type: 'win', value: 96 },
-      { type: 'win', value: 96 },
-      { type: null, value: 0 },
-    ],
-    id: 1,
-  },
-  {
-    name: 'Jason',
-    totalScore: 0,
-    scores: [
-      { type: null, value: 0 },
-      { type: 'lose', value: 96 },
-      { type: 'lose', value: 96 },
-      { type: 'lose', value: 96 },
-      { type: null, value: 0 },
-    ],
-    id: 2,
-  },
-  {
-    name: 'Victoria',
-    totalScore: 0,
-    scores: [
-      { type: 'win', value: 128 },
-      { type: null, value: 0 },
-      { type: null, value: 0 },
-      { type: null, value: 0 },
-      { type: null, value: 0 },
-    ],
-    id: 3,
-  },
-  {
-    name: 'Caroline',
-    totalScore: 0,
-    scores: [
-      { type: null, value: 0 },
-      { type: 'win', value: 96 },
-      { type: null, value: 0 },
-      { type: null, value: 0 },
-      { type: 'lose', value: 128 },
-    ],
-    id: 4,
-  },
-];
+import { defaultScoreBoard } from '@shared/constants';
+import { getScoreColor } from 'src/utils/scoreUtils';
 
 const Main = () => {
   const [showScoreModal, setShowScoreModal] = useState(false);
@@ -73,16 +23,6 @@ const Main = () => {
   const handleOpenScoreModal = (name: string) => {
     setShowScoreModal(true);
     setSelectedPlayer(name);
-  };
-  const getScoreColor = (type: 'win' | 'lose' | null) => {
-    switch (type) {
-      case 'win':
-        return 'success';
-      case 'lose':
-        return 'error';
-      default:
-        return 'white';
-    }
   };
 
   const namesList = ['Veronica', 'Jason', 'Caroline', 'Victoria'];

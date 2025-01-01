@@ -4,7 +4,7 @@ export enum WinType {
 }
 
 export interface Score {
-  type: 'win' | 'lose' | null;
+  type: ScoreType | null;
   value: number;
 }
 
@@ -13,4 +13,9 @@ export interface Player {
   name: string;
   totalScore: number;
   scores: Score[];
+}
+
+export enum ScoreType {
+  WIN = 'win',
+  LOSE = 'lose',
 }
