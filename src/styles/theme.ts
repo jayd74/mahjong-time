@@ -48,9 +48,6 @@ export const theme = createTheme({
       main: colors.red,
       light: colors.lightRed,
     },
-    info: {
-      main: colors.white,
-    },
   },
   typography: {
     fontFamily: `'Roboto', Arial, sans-serif`,
@@ -145,14 +142,6 @@ export const theme = createTheme({
         },
       },
     },
-
-    MuiTableHead: {
-      styleOverrides: {
-        root: {
-          width: '25%',
-        },
-      },
-    },
     MuiTableCell: {
       styleOverrides: {
         root: {
@@ -160,6 +149,7 @@ export const theme = createTheme({
           textAlign: 'center',
           height: '32px',
           margin: '10px',
+          width: '25%',
         },
       },
     },

@@ -63,6 +63,7 @@ const ScoreModalButton = ({
       color="info"
       sx={(theme) => getButtonStyle(theme)}
       onClick={onClick}
+      disableRipple
     >
       <Typography
         variant="body1"

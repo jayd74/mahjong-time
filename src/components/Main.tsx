@@ -81,7 +81,7 @@ const Main = () => {
       case 'lose':
         return 'error';
       default:
-        return 'info';
+        return 'white';
     }
   };
 

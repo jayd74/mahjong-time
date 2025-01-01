@@ -40,15 +40,11 @@ const ScoreModal = ({
   };
 
   const handlePointsButtonClick = (pointsText: string) => {
-    setSelectedPointsButton((prev) =>
-      prev === pointsText ? null : pointsText
-    );
+    setSelectedPointsButton(pointsText);
   };
 
   const handleWinTypeButtonClick = (winTypeText: WinType) => {
-    setSelectedWinTypeButton((prev) =>
-      prev === winTypeText ? WinType.OPPONENT : winTypeText
-    );
+    setSelectedWinTypeButton(winTypeText);
 
     if (winTypeText === WinType.OPPONENT) {
       setSelectedNameButton(null);
@@ -58,7 +54,7 @@ const ScoreModal = ({
   };
 
   const handleNameButtonClick = (nameText: string) => {
-    setSelectedNameButton((prev) => (prev === nameText ? null : nameText));
+    setSelectedNameButton(nameText);
   };
 
   const ScoreModalStyle = {
