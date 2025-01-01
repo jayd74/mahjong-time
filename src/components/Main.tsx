@@ -27,6 +27,14 @@ const Main = () => {
     localStorage.setItem('playerNames', JSON.stringify(namesList));
   }, [namesList]);
 
+  const handleNameChange = (index: number, newName: string) => {
+    setNamesList((prevNames) => {
+      const updatedNames = [...prevNames];
+      updatedNames[index] = newName;
+      return updatedNames;
+    });
+  };
+
   const handleOpenScoreModal = (name: string) => {
     setShowScoreModal(true);
     setSelectedPlayer(name);
@@ -41,20 +49,12 @@ const Main = () => {
         height: '100vh',
       }}
     >
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => setShowEditPlayerModal(true)}
-      >
-        Edit Player Names
-      </Button>
-
       {showEditPlayerModal && (
         <EditPlayerModal
           open={showEditPlayerModal}
           setShowEditPlayerModal={setShowEditPlayerModal}
           namesList={namesList}
-          setNamesList={setNamesList}
+          handleNameChange={handleNameChange}
         />
       )}
 
@@ -69,7 +69,11 @@ const Main = () => {
         <Button color="primary" variant="contained">
           End Game
         </Button>
-        <Button color="primary" variant="contained">
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => setShowEditPlayerModal(true)}
+        >
           Edit names
         </Button>
       </Box>
@@ -82,7 +86,11 @@ const Main = () => {
           setShowScoreModal={setShowScoreModal}
         />
       )}
-      <ScoreTable handleOpenScoreModal={handleOpenScoreModal} rounds={rounds} />
+      <ScoreTable
+        handleOpenScoreModal={handleOpenScoreModal}
+        rounds={rounds}
+        namesList={namesList}
+      />
     </Box>
   );
 };

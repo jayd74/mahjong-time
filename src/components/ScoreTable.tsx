@@ -7,49 +7,61 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { defaultScoreBoard } from '@shared/constants';
-import PlayerTile from '@components/PlayerTile';
 import { getScoreColor } from '@utils/scoreUtils';
+import PlayerTile from '@components/PlayerTile';
+import { defaultScoreBoard } from '@shared/constants';
 
 interface ScoreTableProps {
   handleOpenScoreModal: (name: string) => void;
   rounds: number[];
+  namesList: string[];
 }
 
-const ScoreTable = ({ handleOpenScoreModal, rounds }: ScoreTableProps) => {
+const ScoreTable = ({
+  handleOpenScoreModal,
+  rounds,
+  namesList,
+}: ScoreTableProps) => {
   return (
     <TableContainer>
       <Table>
         <TableHead>
           <TableRow>
-            {defaultScoreBoard.map(({ id, name, totalScore }) => (
-              <TableCell key={id}>
-                <PlayerTile
-                  name={name}
-                  score={totalScore}
-                  onClick={() => handleOpenScoreModal(name)}
-                />
-              </TableCell>
-            ))}
+            {namesList.map((name, index) => {
+              const player = defaultScoreBoard[index];
+              if (!player) return null;
+
+              return (
+                <TableCell key={index}>
+                  <PlayerTile
+                    key={player.id}
+                    name={name}
+                    score={player.totalScore}
+                    onClick={() => handleOpenScoreModal(player.name)}
+                  />
+                </TableCell>
+              );
+            })}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rounds.map((round) => {
-            return (
-              <TableRow key={round}>
-                {defaultScoreBoard.map(({ id, scores }) => (
-                  <TableCell key={id}>
-                    <Typography
-                      variant="h5"
-                      color={getScoreColor(scores[round].type)}
-                    >
-                      {scores[round].value || '-'}
+          {rounds.map((round) => (
+            <TableRow key={round}>
+              {namesList.map((name, index) => {
+                const player = defaultScoreBoard[index];
+                if (!player) return null;
+
+                const score = player.scores[round];
+                return (
+                  <TableCell key={index}>
+                    <Typography variant="h5" color={getScoreColor(score.type)}>
+                      {score.value || '-'}
                     </Typography>
                   </TableCell>
-                ))}
-              </TableRow>
-            );
-          })}
+                );
+              })}
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </TableContainer>

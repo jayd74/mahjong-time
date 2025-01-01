@@ -6,7 +6,7 @@ interface EditPlayerModalProps {
   open: boolean;
   setShowEditPlayerModal: (value: boolean) => void;
   namesList: string[];
-  setNamesList: (newNames: string[]) => void;
+  handleNameChange: (index: number, newName: string) => void;
 }
 
 const EditPlayerModalStyle = {
@@ -25,7 +25,7 @@ const EditPlayerModal = ({
   open,
   setShowEditPlayerModal,
   namesList,
-  setNamesList,
+  handleNameChange,
 }: EditPlayerModalProps) => {
   const [editedNames, setEditedNames] = useState<string[]>(namesList);
 
@@ -37,23 +37,20 @@ const EditPlayerModal = ({
     setShowEditPlayerModal(false);
   };
 
-  const handleNameChange = (index: number, newValue: string) => {
-    const updatedNames = [...editedNames];
-    updatedNames[index] = newValue;
-    setEditedNames(updatedNames);
-  };
-
   const handleSaveChanges = () => {
     if (editedNames.some((name) => !name.trim())) {
-      alert('Player names cannot be empty.');
+      alert('PLAYER NAMES CANNOT BE EMPTY LIKE YOUR HEART 🙄');
       return;
     }
     if (new Set(editedNames).size !== editedNames.length) {
-      alert('Player names must be unique.');
+      alert('DRY CODE (NAMES) ONLY 💁🏼‍♀️');
       return;
     }
 
-    setNamesList(editedNames);
+    editedNames.forEach((name, index) => {
+      handleNameChange(index, name);
+    });
+
     handleEditPlayerModalClose();
   };
 
@@ -95,12 +92,22 @@ const EditPlayerModal = ({
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {editedNames.map((name, index) => (
-            <Input
-              key={index}
-              value={name}
-              onChange={(e) => handleNameChange(index, e.target.value)}
-              placeholder={`Player ${index + 1}`}
-            />
+            <Box key={index} sx={{ marginBottom: 2 }}>
+              <Input
+                key={index}
+                placeholder={`Player ${index + 1}`}
+                value={name}
+                onChange={(e) => {
+                  const newName = e.target.value;
+                  setEditedNames((prevNames) => {
+                    const updatedNames = [...prevNames];
+                    updatedNames[index] = newName;
+                    return updatedNames;
+                  });
+                }}
+                fullWidth
+              />
+            </Box>
           ))}
         </Box>
         <Button
