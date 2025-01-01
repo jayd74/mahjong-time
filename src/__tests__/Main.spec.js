@@ -4,6 +4,6 @@ import Main from '@components/Main';
 describe('Main', () => {
   test('should render correctly', () => {
     render(<Main />);
-    expect(screen.getByText('Jason')).toBeInTheDocument();
+    expect(screen.getByText('Veronica')).toBeInTheDocument();
   });
 });

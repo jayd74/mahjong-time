@@ -19,3 +19,13 @@ export enum ScoreType {
   WIN = 'win',
   LOSE = 'lose',
 }
+
+export interface ScoreValues {
+  opponentLoss: number;
+  selfDraw: number;
+  coverAll: number;
+}
+
+export type Scores = {
+  [key: number | string]: ScoreValues;
+};

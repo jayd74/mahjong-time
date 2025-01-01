@@ -7,20 +7,22 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { getScoreColor } from '@utils/scoreUtils';
 import PlayerTile from '@components/PlayerTile';
-import { defaultScoreBoard } from '@shared/constants';
+import { getScoreColor } from '@utils/scoreUtils';
+import { Player } from '@shared/types';
 
 interface ScoreTableProps {
   handleOpenScoreModal: (name: string) => void;
   rounds: number[];
   namesList: string[];
+  scoreData: Player[];
 }
 
 const ScoreTable = ({
   handleOpenScoreModal,
   rounds,
   namesList,
+  scoreData,
 }: ScoreTableProps) => {
   return (
     <TableContainer>
@@ -28,13 +30,12 @@ const ScoreTable = ({
         <TableHead>
           <TableRow>
             {namesList.map((name, index) => {
-              const player = defaultScoreBoard[index];
+              const player = scoreData[index];
               if (!player) return null;
 
               return (
-                <TableCell key={index}>
+                <TableCell key={name}>
                   <PlayerTile
-                    key={player.id}
                     name={name}
                     score={player.totalScore}
                     onClick={() => handleOpenScoreModal(player.name)}
@@ -45,23 +46,26 @@ const ScoreTable = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {rounds.map((round) => (
-            <TableRow key={round}>
-              {namesList.map((name, index) => {
-                const player = defaultScoreBoard[index];
-                if (!player) return null;
-
-                const score = player.scores[round];
-                return (
-                  <TableCell key={index}>
-                    <Typography variant="h5" color={getScoreColor(score.type)}>
-                      {score.value || '-'}
-                    </Typography>
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          ))}
+          {rounds?.map((round) => {
+            return (
+              <TableRow key={round}>
+                {namesList.map((name, index) => {
+                  const player = scoreData[index];
+                  if (!player) return null;
+                  return (
+                    <TableCell key={name}>
+                      <Typography
+                        variant="h5"
+                        color={getScoreColor(player.scores[round]?.type)}
+                      >
+                        {player.scores[round]?.value || '-'}
+                      </Typography>
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>
