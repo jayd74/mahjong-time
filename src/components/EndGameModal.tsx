@@ -1,43 +1,18 @@
 import { Box, Button, Modal, Typography } from '@mui/material';
-import { Player, Score } from '@shared/types';
 
-interface DeleteModalProps {
-  scoreData: Player[];
-  round: number;
+interface EndGameModalProps {
   open: boolean;
   onClose: () => void;
-  setScoreData: (value: Player[]) => void;
-  setRounds: (value: number[]) => void;
+  handleResetScore: () => void;
 }
 
-const DeleteModal = ({
-  scoreData,
-  round,
+const EndGameModal = ({
   open,
   onClose,
-  setScoreData,
-  setRounds,
-}: DeleteModalProps) => {
-  const handleDeleteRound = () => {
-    const newScoreData = scoreData.map((player) => {
-      const newRounds = [...player.scores];
-      newRounds.splice(round, 1);
-
-      let totalScore;
-      if (player.scores[round].type === 'win') {
-        totalScore = player.totalScore - player.scores[round].value;
-      } else {
-        totalScore = player.totalScore + player.scores[round].value;
-      }
-      return { ...player, totalScore, scores: newRounds };
-    });
-    const playerScore = newScoreData.find((player: Player) => player.scores);
-    const rounds =
-      playerScore?.scores.map((_score: Score, index: number) => index) || [];
-    setRounds(rounds);
-    setScoreData(newScoreData);
-
-    localStorage.setItem('scoreData', JSON.stringify(newScoreData));
+  handleResetScore,
+}: EndGameModalProps) => {
+  const handleEndGame = () => {
+    handleResetScore();
     onClose();
   };
 
@@ -67,14 +42,14 @@ const DeleteModal = ({
             sx={{ textAlign: 'center', margin: '30px 0' }}
             color="textPrimary"
           >
-            Are you sure you want to delete the score from this round?
+            Are you sure you want to end the game?
           </Typography>
           <Typography
             variant="body1"
             sx={{ textAlign: 'center', margin: '30px 0' }}
             color="textPrimary"
           >
-            This can&apos;t be undone
+            This will clear the score board
           </Typography>
         </Box>
         <Box sx={{ display: 'flex', gap: '20px' }}>
@@ -89,9 +64,9 @@ const DeleteModal = ({
             variant="contained"
             color="warning"
             sx={{ width: '100%', p: '30px' }}
-            onClick={handleDeleteRound}
+            onClick={handleEndGame}
           >
-            <Typography variant="body1">Delete Round</Typography>
+            <Typography variant="body1">End game</Typography>
           </Button>
         </Box>
       </Box>
@@ -99,4 +74,4 @@ const DeleteModal = ({
   );
 };
 
-export default DeleteModal;
+export default EndGameModal;

@@ -3,6 +3,7 @@ import { Box, Button } from '@mui/material';
 import ScoreTable from '@components/ScoreTable';
 import ScoreModal from '@components/ScoreModal';
 import EditPlayerModal from '@components/EditPlayerModal';
+import EndGameModal from '@components/EndGameModal';
 import { scores, defaultScoreBoard, defaultNamesList } from '@shared/constants';
 import { Player, Score, ScoreType, WinType } from '@shared/types';
 
@@ -13,6 +14,7 @@ const Main = () => {
   const [rounds, setRounds] = useState<number[]>([]);
   const [showEditPlayerModal, setShowEditPlayerModal] = useState(false);
   const [namesList, setNamesList] = useState<string[]>(defaultNamesList);
+  const [endGameModalOpen, setEndGameModalOpen] = useState(false);
 
   useEffect(() => {
     const playerNames = localStorage.getItem('playerNames');
@@ -150,6 +152,16 @@ const Main = () => {
     setRounds([...rounds, rounds.length]);
   };
 
+  const handleResetScore = () => {
+    const resetScores = scoreData.map((playerData) => ({
+      ...playerData,
+      totalScore: 0,
+      scores: [],
+    }));
+    setScoreData(resetScores);
+    setRounds([]);
+  };
+
   return (
     <Box
       sx={{
@@ -176,7 +188,11 @@ const Main = () => {
           padding: '20px',
         }}
       >
-        <Button color="primary" variant="contained">
+        <Button
+          color="primary"
+          variant="contained"
+          onClick={() => setEndGameModalOpen(true)}
+        >
           End Game
         </Button>
         <Button
@@ -195,6 +211,14 @@ const Main = () => {
           namesList={namesList.filter((name) => name !== selectedPlayer)}
           setShowScoreModal={setShowScoreModal}
           handleAddScore={handleAddScore}
+        />
+      )}
+
+      {endGameModalOpen && (
+        <EndGameModal
+          open={endGameModalOpen}
+          onClose={() => setEndGameModalOpen(false)}
+          handleResetScore={handleResetScore}
         />
       )}
       <ScoreTable
