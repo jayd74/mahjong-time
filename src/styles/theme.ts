@@ -166,6 +166,7 @@ export const theme = createTheme({
           height: '32px',
           margin: '10px',
           width: '25%',
+          background: 'transparent',
         },
       },
     },
